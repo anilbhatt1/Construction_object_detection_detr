@@ -172,16 +172,19 @@ def main(args):
 
     output_dir = Path(args.output_dir)
     if args.resume:
+        print(f'args.resume : {args.resume}')
         if args.resume.startswith('https'):
             checkpoint = torch.hub.load_state_dict_from_url(
                 args.resume, map_location='cpu', check_hash=True)
-        else:
+        else:            
             checkpoint = torch.load(args.resume, map_location='cpu')
+            print(f'checkpoint loaded from {args.resume}')
         model_without_ddp.load_state_dict(checkpoint['model'], strict=False)
         if not args.eval and 'optimizer' in checkpoint and 'lr_scheduler' in checkpoint and 'epoch' in checkpoint:
             optimizer.load_state_dict(checkpoint['optimizer'])
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             args.start_epoch = checkpoint['epoch'] + 1
+            print(f'args.start_epoch : {args.start_epoch}')
 
     if args.eval:
         test_stats, coco_evaluator = evaluate(model, criterion, postprocessors,
@@ -193,7 +196,7 @@ def main(args):
     print("Start training")
     start_time = time.time()
     for epoch in range(args.start_epoch, args.epochs):
-        print(f"Entering loop {args.start_epoch}, {args.epochs}, {epoch}")
+        print(f"Entering loop args.start_epoch : {args.start_epoch}, args.epochs : {args.epochs}, epoch : {epoch}")
         if args.distributed:
             sampler_train.set_epoch(epoch)
         train_stats = train_one_epoch(
