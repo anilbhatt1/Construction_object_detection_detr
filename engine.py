@@ -121,7 +121,6 @@ def evaluate(model, criterion, postprocessors, data_loader, base_ds, device, out
         samples = samples.to(device)
         targets = [{k: v.to(device) for k, v in t.items()} for t in targets]        
         
-        print(f'Eval Iteration : {iter__}, samples.size() : {samples.tensors.shape}')
         iter__ +=1 
         print_flag = 0
         
