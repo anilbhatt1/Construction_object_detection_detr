@@ -185,8 +185,8 @@ def main(args):
             optimizer.load_state_dict(checkpoint['optimizer'])
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
             args.start_epoch = checkpoint['epoch'] + 1
-            optimizer.param_groups[0]["lr"] = 0.001
-            print(f'args.start_epoch : {args.start_epoch} and lr set to 0.0002')
+            #optimizer.param_groups[0]["lr"] = 0.001
+            #print(f'args.start_epoch : {args.start_epoch} and lr set to 0.0002')
 
     if args.eval:
         test_stats, coco_evaluator = evaluate(model, criterion, postprocessors,
