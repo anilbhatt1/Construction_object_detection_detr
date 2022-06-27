@@ -184,11 +184,14 @@ def main(args):
         if not args.eval and 'optimizer' in checkpoint and 'lr_scheduler' in checkpoint and 'epoch' in checkpoint:
             optimizer.load_state_dict(checkpoint['optimizer'])
             lr_scheduler.load_state_dict(checkpoint['lr_scheduler'])
-            args.start_epoch = checkpoint['epoch'] + 1
-            #optimizer.param_groups[0]["lr"] = 0.001
+            args.start_epoch = checkpoint['epoch'] + 1            
             print(f' lr_scheduler in checkpoint {'lr_scheduler' in checkpoint} , 'optimizer' in checkpoint {'optimizer' in checkpoint}')
             print(f" lr_scheduler.optimizer.param_groups[0]['lr'] : {lr_scheduler.optimizer.param_groups[0]['lr']} ")
             print(f' optimizer.param_groups[0]["lr"] : {optimizer.param_groups[0]["lr"]}')
+            optimizer.param_groups[0]["lr"] = 0.00002
+            lr_scheduler.optimizer.param_groups[0]['lr'] = 0.00002
+            print(f" New lr_scheduler.optimizer.param_groups[0]['lr'] : {lr_scheduler.optimizer.param_groups[0]['lr']} ")
+            print(f' New optimizer.param_groups[0]["lr"] : {optimizer.param_groups[0]["lr"]}')         
 
     if args.eval:
         test_stats, coco_evaluator = evaluate(model, criterion, postprocessors,
