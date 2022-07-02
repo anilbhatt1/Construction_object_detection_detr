@@ -188,8 +188,8 @@ def main(args):
             print(f" lr_scheduler in checkpoint {'lr_scheduler' in checkpoint} , 'optimizer' in checkpoint {'optimizer' in checkpoint}")
             print(f" lr_scheduler.optimizer.param_groups[0]['lr'] : {lr_scheduler.optimizer.param_groups[0]['lr']} ")
             print(f' optimizer.param_groups[0]["lr"] : {optimizer.param_groups[0]["lr"]}')
-            optimizer.param_groups[0]["lr"] = 0.000002
-            lr_scheduler.optimizer.param_groups[0]['lr'] = 0.000002
+            optimizer.param_groups[0]["lr"] = 0.0000002
+            lr_scheduler.optimizer.param_groups[0]['lr'] = 0.0000002
             print(f" New lr_scheduler.optimizer.param_groups[0]['lr'] : {lr_scheduler.optimizer.param_groups[0]['lr']} ")
             print(f' New optimizer.param_groups[0]["lr"] : {optimizer.param_groups[0]["lr"]}')         
 
